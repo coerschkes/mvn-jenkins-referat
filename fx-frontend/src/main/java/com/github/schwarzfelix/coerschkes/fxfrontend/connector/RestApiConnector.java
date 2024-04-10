@@ -43,6 +43,7 @@ public class RestApiConnector {
                                         final HttpResponse.BodyHandler<T> bodyHandler,
                                         final Consumer<T> responseConsumer) {
         CompletableFuture<HttpResponse<T>> responseFuture = HTTPCLIENT.sendAsync(request, bodyHandler);
+        //todo: Handle NullPointerException when request does not succeed
         responseFuture.whenComplete((response, throwable) -> Platform.runLater(() -> responseConsumer.accept(response.body())));
     }
 }
