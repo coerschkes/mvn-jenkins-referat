@@ -1,5 +1,6 @@
 package com.github.schwarzfelix.coerschkes.fxfrontend;
 
+import com.github.schwarzfelix.coerschkes.fxfrontend.connector.RestApiConnector;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 

@@ -1,4 +1,4 @@
-package com.github.schwarzfelix.coerschkes.fxfrontend;
+package com.github.schwarzfelix.coerschkes.fxfrontend.connector;
 
 import javafx.application.Platform;
 
@@ -42,11 +42,7 @@ public class RestApiConnector {
     private static <T> void callRestApi(final HttpRequest request,
                                         final HttpResponse.BodyHandler<T> bodyHandler,
                                         final Consumer<T> responseConsumer) {
-        ((Runnable) () -> {
-            CompletableFuture<HttpResponse<T>> responseFuture = HTTPCLIENT.sendAsync(request, bodyHandler);
-            responseFuture.whenComplete((response, throwable) -> {
-                Platform.runLater(() -> responseConsumer.accept(response.body()));
-            });
-        }).run();
+        CompletableFuture<HttpResponse<T>> responseFuture = HTTPCLIENT.sendAsync(request, bodyHandler);
+        responseFuture.whenComplete((response, throwable) -> Platform.runLater(() -> responseConsumer.accept(response.body())));
     }
 }
