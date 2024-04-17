@@ -1,18 +1,22 @@
 package com.github.schwarzfelix.coerschkes.resourceserver.domain.application;
 
 import com.github.schwarzfelix.coerschkes.resourceserver.domain.entity.CampingTent;
+import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class InMemoryRepository implements CampingTentRepository {
     private final List<CampingTent> campingTents;
 
     public InMemoryRepository() {
-        this.campingTents = List.of(
+        this.campingTents = new ArrayList<>();
+        this.campingTents.addAll(List.of(
                 new CampingTent(1L, "BigBaba Tent", "This tent is what it's name states: big baba and great!", "399€"),
                 new CampingTent(2L, "Small pit", "small but  comfortable", "20€")
-        );
+        ));
     }
 
     @Override
