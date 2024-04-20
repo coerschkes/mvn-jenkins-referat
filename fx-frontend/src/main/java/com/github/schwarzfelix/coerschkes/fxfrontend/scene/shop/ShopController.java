@@ -14,41 +14,43 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class ShopController extends BaseController {
+    private static final Logger LOGGER = Logger.getLogger(ShopController.class.getName());
     private Stage detailsStage;
 
     @FXML
     private TableView<CampingTentRow> tableStock;
 
     public void initialize() {
-        tableStock.getItems().clear();
+        this.tableStock.getItems().clear();
         //todo call api here async to load items
-        tableStock.setItems(FXCollections.observableList(List.of(new CampingTentRow("test", "1,80m x 2,20m x 3,10m", 2, "699,44€", 300))));
+        this.tableStock.setItems(FXCollections.observableList(List.of(new CampingTentRow("test", "1,80m x 2,20m x 3,10m", 2, "699,44€", 300))));
     }
 
     @FXML
-    public void onButtonDetailsClicked() throws IOException {
-        if (detailsStage == null) {
+    public void onButtonDetailsClicked() {
+        if (this.detailsStage == null) {
             initializeDetailsStage();
         }
         final CampingTentDetails campingTentDetails = new CampingTentDetails("1", this.getTestEncodedImg(), "asjkdlg", "sajkslgd", "asgjkl");
-        setContent(campingTentDetails);
-        detailsStage.show();
+        this.getController(DetailsController.class).setContent(campingTentDetails);
+        this.detailsStage.show();
     }
 
-    private void setContent(final CampingTentDetails details) {
-        this.getController(DetailsController.class).setContent(details);
-    }
-
-    private void initializeDetailsStage() throws IOException {
-        this.detailsStage = new Stage();
-        this.detailsStage.setTitle("Details");
-        this.detailsStage.setScene(new Scene(getLoader(DetailsController.class).load(), 600, 500));
-        this.detailsStage.setOnShown(s -> {
-            throw new ForcedReloadException();
-        });
-        resizeStageToScene(detailsStage, detailsStage.getScene());
+    private void initializeDetailsStage() {
+        try {
+            this.detailsStage = new Stage();
+            this.detailsStage.setTitle("Details");
+            this.detailsStage.setScene(new Scene(getLoader(DetailsController.class).load(), 600, 500));
+            this.detailsStage.setOnShown(s -> {
+                throw new ForcedReloadException();
+            });
+            resizeStageToScene(detailsStage, detailsStage.getScene());
+        } catch (IOException e) {
+            LOGGER.warning("Could not initialize details stage");
+        }
     }
 
     private String getTestEncodedImg() {

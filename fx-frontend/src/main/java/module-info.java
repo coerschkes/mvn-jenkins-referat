@@ -3,6 +3,7 @@ module com.github.schwarzfelix.coerschkes.fxfrontend {
     requires javafx.fxml;
     requires java.net.http;
     requires com.google.gson;
+    requires java.logging;
 
 
     opens com.github.schwarzfelix.coerschkes.fxfrontend to javafx.fxml;
