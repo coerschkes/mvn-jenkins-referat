@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<BorderPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.github.schwarzfelix.coerschkes.fxfrontend.scene.shop.ShopController">
+    <Pane prefHeight="500" prefWidth="400" BorderPane.alignment="CENTER">
+        <TableView fx:id="tableStock" maxWidth="400" prefWidth="400" prefHeight="450">
+            <columns>
+                <TableColumn text="Name">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="name"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Size">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="size"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Persons">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="persons"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Price">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="price"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Stock">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="stock"/>
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+        <Button onAction="#onButtonDetailsClicked" text="Details" prefHeight="40" prefWidth="100" layoutX="180"
+                layoutY="455"/>
+        <Button onAction="#onButtonOrderClicked" text="Order" prefHeight="40" prefWidth="100" layoutX="290"
+                layoutY="455"/>
+    </Pane>
+</BorderPane>
