@@ -13,7 +13,12 @@ class CampingTentFactory {
     }
 
     static List<CampingTent> listFromJson(final String json) {
-        final TypeToken<List<CampingTent>> typeToken = new TypeToken<>() {};
+        final TypeToken<List<CampingTent>> typeToken = new TypeToken<>() {
+        };
         return GSON.fromJson(json, typeToken.getType());
+    }
+
+    static String toJson(final CampingTent campingTent) {
+        return GSON.toJson(campingTent);
     }
 }

@@ -4,17 +4,21 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class TentRestRepository {
-    private static final RestApiConnector CONNECTOR = new RestApiConnector();
+    private final RestApiConnector connector;
 
-    public static void getTent(final int id, final Consumer<CampingTent> callback) {
-        CONNECTOR.get("/tents/" + id, callback);
+    public TentRestRepository(final String baseUrl) {
+        this.connector = new RestApiConnector(baseUrl);
     }
 
-    public static void getAllTents(final Consumer<List<CampingTent>> callback) {
-        CONNECTOR.getCollection("/tents", callback);
+    public void getTent(final int id, final Consumer<CampingTent> callback) {
+        this.connector.getById(id, callback);
     }
 
-    public static void orderTent(final int id, final Consumer<CampingTent> callback) {
+    public void getAllTents(final Consumer<List<CampingTent>> callback) {
+        this.connector.getAll(callback);
+    }
 
+    public void orderTent(final CampingTent campingTent, final Consumer<Boolean> callback) {
+        this.connector.put(campingTent.id(), campingTent, callback);
     }
 }

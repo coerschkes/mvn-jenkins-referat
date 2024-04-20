@@ -11,9 +11,10 @@ public class RequestBuilder {
         this.baseUri = baseUri;
     }
 
-    HttpRequest buildDeleteRequest(final String path) {
+    HttpRequest buildPutRequest(final String path, final CampingTent body) {
         try {
-            return buildSimpleRequest(path).DELETE().build();
+            final var publisher = HttpRequest.BodyPublishers.ofString(CampingTentFactory.toJson(body));
+            return buildSimpleRequest(path).PUT(publisher).build();
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }

@@ -11,36 +11,45 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 class RestApiConnector {
-    private static final String BASE_URI = "http://localhost:8080";
     private static final HttpClient HTTPCLIENT = HttpClient.newHttpClient();
-    private static final RequestBuilder REQUEST_BUILDER = new RequestBuilder(BASE_URI);
+    private final String baseUrl;
+    private final RequestBuilder requestBuilder;
 
-    void get(final String path, final Consumer<CampingTent> callback) {
-        callGet(path, callback, CampingTentFactory::fromJson);
+    RestApiConnector(final String baseUrl) {
+        this.baseUrl = baseUrl;
+        this.requestBuilder = new RequestBuilder(baseUrl);
     }
 
-    void getCollection(final String path, final Consumer<List<CampingTent>> callback) {
-        callGet(path, callback, CampingTentFactory::listFromJson);
+    void getById(final long id, final Consumer<CampingTent> callback) {
+        callGet("/tents/" + id, callback, CampingTentFactory::fromJson);
     }
 
-    void delete(final String path, final Consumer<String> callback) {
+    void getAll(final Consumer<List<CampingTent>> callback) {
+        callGet("/tents", callback, CampingTentFactory::listFromJson);
+    }
 
+    void put(final long id, final CampingTent body, final Consumer<Boolean> callback) {
+        callPut("/tents/" + id, body, callback);
     }
 
     private <T> void callGet(final String path, final Consumer<T> callback, final Function<String, T> function) {
-        final HttpRequest request = REQUEST_BUILDER.buildGetRequest(path);
-        //todo: Handle NullPointerException when request does not succeed
-        callApiAsync(request, (response, throwable) -> Platform.runLater(() -> callback.accept(function.apply((String) response.body()))));
+        callApi(requestBuilder.buildGetRequest(path), callback, function);
     }
 
-    private <T> void callDelete(final String path, final Consumer<String> callback) {
-//        build remove request
-        final HttpRequest request = REQUEST_BUILDER.buildDeleteRequest(path);
-        //todo: Handle NullPointerException when request does not succeed
-        callApiAsync(request, (response, throwable) -> Platform.runLater(() -> callback.accept((String) response.body())));
+    private <T> void callPut(final String path, final CampingTent body, final Consumer<Boolean> callback) {
+        callApi(requestBuilder.buildPutRequest(path, body), callback, Boolean::valueOf);
     }
 
-    private static void callApiAsync(HttpRequest request, BiConsumer<HttpResponse<String>, Throwable> futureConsumer) {
+    private <T> void callApi(final HttpRequest request, final Consumer<T> callback, final Function<String, T> transformer) {
+        sendAsyncRequest(request, (response, throwable) -> Platform.runLater(() -> {
+            if (response == null) {
+                throw new CommunicationFailureException("Unable to connect to the api on '" + baseUrl + "'.");
+            }
+            callback.accept(transformer.apply(response.body()));
+        }));
+    }
+
+    private static void sendAsyncRequest(final HttpRequest request, final BiConsumer<HttpResponse<String>, Throwable> futureConsumer) {
         final var responseFuture = HTTPCLIENT.sendAsync(request, HttpResponse.BodyHandlers.ofString());
         responseFuture.whenComplete(futureConsumer);
     }
