@@ -2,6 +2,7 @@ package com.github.schwarzfelix.coerschkes.fxfrontend.scene.shop;
 
 import com.github.schwarzfelix.coerschkes.fxfrontend.infrastructure.CampingTent;
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.BaseController;
+import com.github.schwarzfelix.coerschkes.fxfrontend.scene.InMemoryCache;
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.details.CampingTentDetails;
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.details.DetailsController;
 import javafx.animation.PauseTransition;
@@ -13,21 +14,32 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.util.Base64;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
 
 public class ShopController extends BaseController {
     private static final Logger LOGGER = Logger.getLogger(ShopController.class.getName());
+    private final InMemoryCache cache = new InMemoryCache();
     private Stage detailsStage;
 
     @FXML
     private TableView<CampingTentRow> tableStock;
 
     public void initialize() {
-        this.tableStock.getItems().clear();
         this.repository.getAllTents(refreshStockTable());
+    }
+
+    private Consumer<List<CampingTent>> refreshStockTable() {
+        return tents -> {
+            this.tableStock.getItems().clear();
+            this.cache.clear();
+            tableStock.setItems(FXCollections.observableList(tents
+                    .stream()
+                    .peek(this.cache::add)
+                    .map(CampingTentRow::of)
+                    .toList()));
+        };
     }
 
     @FXML
@@ -35,16 +47,16 @@ public class ShopController extends BaseController {
         if (this.detailsStage == null) {
             initializeDetailsStage();
         }
-        final CampingTentDetails campingTentDetails = new CampingTentDetails("1", this.getTestEncodedImg(), "asjkdlg", "sajkslgd", "asgjkl");
-        this.getController(DetailsController.class).setContent(campingTentDetails);
-        this.detailsStage.show();
+        final CampingTentRow selectedItem = this.tableStock.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            showDetailsStage(selectedItem);
+        }
     }
 
-    private Consumer<List<CampingTent>> refreshStockTable() {
-        return tents -> tableStock.setItems(FXCollections.observableList(tents
-                .stream()
-                .map(CampingTentRow::of)
-                .toList()));
+    private void showDetailsStage(CampingTentRow selectedItem) {
+        final CampingTent lookup = this.cache.lookup(selectedItem.getName());
+        this.getController(DetailsController.class).setContent(CampingTentDetails.of(lookup));
+        this.detailsStage.show();
     }
 
     private void initializeDetailsStage() {
@@ -58,14 +70,6 @@ public class ShopController extends BaseController {
             resizeStageToScene(detailsStage, detailsStage.getScene());
         } catch (IOException e) {
             LOGGER.warning("Could not initialize details stage");
-        }
-    }
-
-    private String getTestEncodedImg() {
-        try {
-            return Base64.getEncoder().encodeToString(DetailsController.class.getResourceAsStream("test-img.jpg").readAllBytes());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
