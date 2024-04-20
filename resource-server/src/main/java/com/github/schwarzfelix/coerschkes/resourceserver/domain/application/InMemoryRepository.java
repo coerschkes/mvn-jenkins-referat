@@ -38,6 +38,12 @@ public class InMemoryRepository implements CampingTentRepository {
         });
     }
 
+    @Override
+    public void update(CampingTent campingTent) {
+        deleteById(campingTent.id());
+        this.campingTents.add(campingTent);
+    }
+
     private String loadImageAsBase64(final String name) {
         try {
             final byte[] content = this.resourceLoader.getResource("classpath:images/" + name).getContentAsByteArray();

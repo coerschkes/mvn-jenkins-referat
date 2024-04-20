@@ -6,6 +6,7 @@ import com.github.schwarzfelix.coerschkes.resourceserver.domain.entity.CampingTe
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -28,9 +29,9 @@ public class ResourceController {
     }
 
     @DeleteMapping("/tents/{id}")
-    public ResponseEntity<String> deleteTent(@PathVariable long id) {
-        this.repository.deleteById(id);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<String> updateTent(@PathVariable long id) {
+        this.repository.update(repository.findById(id).orElseThrow());
+        return ResponseEntity.created(URI.create("/tents/" + id)).build();
     }
 
 
