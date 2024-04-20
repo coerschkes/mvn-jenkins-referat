@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<BorderPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.github.schwarzfelix.coerschkes.fxfrontend.scene.details.DetailsController">
+    <!--    public record CampingTent(long id, String name, String description, String price, String size, boolean hasInnerTent,
+                              String manufacturer, String color, int personCount, String weight, String material, int stock,
+                              String pictureBase64) {
+    }-->
+    <Pane BorderPane.alignment="CENTER">
+        <ImageView fx:id="tentImage" layoutX="10" layoutY="10" fitWidth="280" fitHeight="400">
+        </ImageView>
+        <Label fx:id="labelName" layoutY="30" layoutX="300">
+            <font>
+                <Font name="System Bold" size="24.0"/>
+            </font>
+        </Label>
+
+        <Label fx:id="labelDescription" prefWidth="290" wrapText="true" layoutY="65" layoutX="300">
+            <font>
+                <Font name="System" size="18.0"/>
+            </font>
+        </Label>
+        <Label fx:id="labelPrice" prefWidth="290" alignment="BASELINE_RIGHT" layoutY="350"
+               layoutX="300">
+            <font>
+                <Font name="System Bold" size="18.0"/>
+            </font>
+        </Label>
+        <Button onAction="#onButtonOrderClicked" text="Order" prefHeight="40" prefWidth="100" layoutX="380"
+                layoutY="400"/>
+        <Button onAction="#onButtonCancelClicked" text="Cancel" prefHeight="40" prefWidth="100" layoutX="490"
+                layoutY="400"/>
+    </Pane>
+</BorderPane>

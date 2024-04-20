@@ -1,17 +1,12 @@
 package com.github.schwarzfelix.coerschkes.fxfrontend.scene.shop;
 
-import com.github.schwarzfelix.coerschkes.fxfrontend.TentApplication;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import com.github.schwarzfelix.coerschkes.fxfrontend.scene.BaseScene;
+import com.github.schwarzfelix.coerschkes.fxfrontend.scene.FXMLLoaderFactory;
 
 import java.io.IOException;
 
-public class ShopScene extends Scene {
+public class ShopScene extends BaseScene {
     public ShopScene() throws IOException {
-        super(getLoader().load(), 600, 500);
-    }
-
-    private static FXMLLoader getLoader() {
-        return new FXMLLoader(TentApplication.class.getResource("shop.fxml"));
+        super(FXMLLoaderFactory.SHOP_SCENE_LOADER.load(), 600, 500);
     }
 }
