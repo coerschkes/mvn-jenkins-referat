@@ -1,5 +1,6 @@
 package com.github.schwarzfelix.coerschkes.fxfrontend.scene.shop;
 
+import com.github.schwarzfelix.coerschkes.fxfrontend.infrastructure.CampingTent;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -16,6 +17,10 @@ public final class CampingTentRow {
         this.persons = new SimpleIntegerProperty(persons);
         this.price = new SimpleStringProperty(price);
         this.stock = new SimpleIntegerProperty(stock);
+    }
+
+    public static CampingTentRow of(final CampingTent tent) {
+        return new CampingTentRow(tent.name(), tent.size(), tent.persons(), tent.price(), tent.stock());
     }
 
     public String getName() {

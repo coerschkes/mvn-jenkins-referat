@@ -1,5 +1,6 @@
 package com.github.schwarzfelix.coerschkes.fxfrontend.scene.shop;
 
+import com.github.schwarzfelix.coerschkes.fxfrontend.infrastructure.CampingTent;
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.BaseController;
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.details.CampingTentDetails;
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.details.DetailsController;
@@ -14,6 +15,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.logging.Logger;
 
 public class ShopController extends BaseController {
@@ -25,8 +27,7 @@ public class ShopController extends BaseController {
 
     public void initialize() {
         this.tableStock.getItems().clear();
-        //todo call api here async to load items
-        this.tableStock.setItems(FXCollections.observableList(List.of(new CampingTentRow("test", "1,80m x 2,20m x 3,10m", 2, "699,44€", 300))));
+        this.repository.getAllTents(refreshStockTable());
     }
 
     @FXML
@@ -37,6 +38,13 @@ public class ShopController extends BaseController {
         final CampingTentDetails campingTentDetails = new CampingTentDetails("1", this.getTestEncodedImg(), "asjkdlg", "sajkslgd", "asgjkl");
         this.getController(DetailsController.class).setContent(campingTentDetails);
         this.detailsStage.show();
+    }
+
+    private Consumer<List<CampingTent>> refreshStockTable() {
+        return tents -> tableStock.setItems(FXCollections.observableList(tents
+                .stream()
+                .map(CampingTentRow::of)
+                .toList()));
     }
 
     private void initializeDetailsStage() {
