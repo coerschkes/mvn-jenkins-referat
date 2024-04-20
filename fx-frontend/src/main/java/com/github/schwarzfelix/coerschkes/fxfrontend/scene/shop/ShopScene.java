@@ -8,10 +8,10 @@ import java.io.IOException;
 
 public class ShopScene extends Scene {
     public ShopScene() throws IOException {
-        super(getLoader().load(), 400, 500);
+        super(getLoader().load(), 600, 500);
     }
 
     private static FXMLLoader getLoader() {
-        return new FXMLLoader(TentApplication.class.getResource("shop-view.fxml"));
+        return new FXMLLoader(TentApplication.class.getResource("shop.fxml"));
     }
 }
