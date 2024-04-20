@@ -24,11 +24,6 @@ public class DetailsController extends BaseController {
     public Label labelDescription;
     public Label labelPrice;
 
-    //todo: remove when actual data incoming
-    public void initialize() {
-        this.tentImage.setImage(new Image(DetailsController.class.getResourceAsStream("test-img.jpg")));
-    }
-
     @FXML
     public void onButtonOrderClicked() {
         if (this.orderStage == null) {
