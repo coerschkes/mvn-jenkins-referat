@@ -1,5 +1,6 @@
 package com.github.schwarzfelix.coerschkes.fxfrontend;
 
+import com.github.schwarzfelix.coerschkes.fxfrontend.infrastructure.TentRestRepository;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,6 +13,7 @@ public class TentApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(TentApplication.class.getResource("tent-application-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        TentRestRepository.getAllTents(l -> l.forEach(System.out::println));
         stage.setTitle("Tent seller");
         stage.setScene(scene);
         stage.show();

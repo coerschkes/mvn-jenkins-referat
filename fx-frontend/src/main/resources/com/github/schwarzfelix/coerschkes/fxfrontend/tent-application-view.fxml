@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.chart.BubbleChart?>
-<?import javafx.scene.control.TextField?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.github.schwarzfelix.coerschkes.fxfrontend.TentController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <Label fx:id="welcomeText"/>
-    <TextField fx:id="inputText"/>
-    <Button text="fetch all" onAction="#onFetchAllButtonClick"/>
-    <Button text="display selected" onAction="#onFetchByIdButtonClick"/>
-    <Button text="delete selected" onAction="#onDeleteByIdButtonClick"/>
-</VBox>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<BorderPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.github.schwarzfelix.coerschkes.fxfrontend.TentController">
+    <center>
+        <Pane prefHeight="240.0" prefWidth="480.0" BorderPane.alignment="CENTER">
+            <Label layoutX="250.0" layoutY="40.0" text="Stock">
+                <font>
+                    <Font name="System Bold" size="24.0"/>
+                </font>
+            </Label>
+<!--            <Button layoutX="40.0" layoutY="170.0" prefHeight="25.0" prefWidth="175.0" text="Order"-->
+<!--                    onAction="#addToList"/>-->
+<!--            <Button layoutX="40.0" layoutY="170.0" prefHeight="25.0" prefWidth="175.0" text="Details"-->
+<!--                    onAction="#addToList"/>-->
+            <TableView fx:id="tablePerson" layoutX="250.0" layoutY="90.0"
+                       prefHeight="110.0" prefWidth="202.0">
+                <columns>
+                    <TableColumn fx:id="columnName" prefWidth="100.0" text="Name"/>
+                    <TableColumn fx:id="columnPrice" prefWidth="100.0" text="Price"/>
+                </columns>
+            </TableView>
+        </Pane>
+    </center>
+</BorderPane>

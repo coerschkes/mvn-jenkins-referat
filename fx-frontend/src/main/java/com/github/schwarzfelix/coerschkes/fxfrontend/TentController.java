@@ -1,6 +1,6 @@
 package com.github.schwarzfelix.coerschkes.fxfrontend;
 
-import com.github.schwarzfelix.coerschkes.fxfrontend.connector.RestApiConnector;
+import com.github.schwarzfelix.coerschkes.fxfrontend.infrastructure.TentRestRepository;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -13,25 +13,22 @@ public class TentController {
 
     @FXML
     protected void onFetchAllButtonClick() {
-        RestApiConnector.callGet("/tents", response -> welcomeText.setText(response.body()));
+        TentRestRepository.getAllTents(campingTents -> welcomeText.setText(campingTents.stream().toString()));
     }
 
     @FXML
     protected void onFetchByIdButtonClick() {
         if (!inputText.getText().isEmpty()) {
-            RestApiConnector.callGet("/tents/" + inputText.getText(), response -> {
-                welcomeText.setText(response.body());
-            });
+            TentRestRepository.getTent(Integer.parseInt(inputText.getText()), campingTent -> welcomeText.setText(campingTent.toString()));
         }
-
     }
 
     @FXML
     protected void onDeleteByIdButtonClick() {
-        if (!inputText.getText().isEmpty()) {
-            RestApiConnector.callDelete("/tents/" + inputText.getText(), response -> {
-                welcomeText.setText(String.valueOf(response.statusCode()));
-            });
-        }
+//        if (!inputText.getText().isEmpty()) {
+//            RestApiConnector.callDelete("/tents/" + inputText.getText(), response -> {
+//                welcomeText.setText(String.valueOf(response.statusCode()));
+//            });
+//        }
     }
 }
