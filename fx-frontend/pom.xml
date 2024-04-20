@@ -68,7 +68,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.github.schwarzfelix.coerschkes.fxfrontend/com.github.schwarzfelix.coerschkes.fxfrontend.TentApplication
+                                com.github.schwarzfelix.coerschkes.fxfrontend/com.github.schwarzfelix.coerschkes.fxfrontend.TentBrokerApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

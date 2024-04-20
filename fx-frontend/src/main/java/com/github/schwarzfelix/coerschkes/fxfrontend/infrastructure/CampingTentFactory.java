@@ -1,6 +1,5 @@
 package com.github.schwarzfelix.coerschkes.fxfrontend.infrastructure;
 
-import com.github.schwarzfelix.coerschkes.fxfrontend.domain.CampingTent;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

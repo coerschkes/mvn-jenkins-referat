@@ -1,18 +1,18 @@
 package com.github.schwarzfelix.coerschkes.fxfrontend;
 
-import com.github.schwarzfelix.coerschkes.fxfrontend.scene.shop.ShopScene;
+import com.github.schwarzfelix.coerschkes.fxfrontend.scene.FXMLLoaderFactory;
+import com.github.schwarzfelix.coerschkes.fxfrontend.scene.shop.ShopController;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class TentApplication extends Application {
+public class TentBrokerApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        final Scene scene = new ShopScene();
-        stage.setTitle("Tent Shop");
+        final Scene scene = new Scene(FXMLLoaderFactory.getLoaderForClass(ShopController.class).load(), 600, 500);
+        stage.setTitle("Tent Broker");
         stage.setScene(scene);
         stage.show();
     }

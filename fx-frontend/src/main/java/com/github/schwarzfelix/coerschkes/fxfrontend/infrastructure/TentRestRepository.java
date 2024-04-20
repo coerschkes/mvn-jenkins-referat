@@ -1,7 +1,5 @@
 package com.github.schwarzfelix.coerschkes.fxfrontend.infrastructure;
 
-import com.github.schwarzfelix.coerschkes.fxfrontend.domain.CampingTent;
-
 import java.util.List;
 import java.util.function.Consumer;
 

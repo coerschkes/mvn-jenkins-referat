@@ -1,9 +1,10 @@
 package com.github.schwarzfelix.coerschkes.fxfrontend.scene.order;
 
+import com.github.schwarzfelix.coerschkes.fxfrontend.scene.BaseController;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class OrderController {
+public class OrderController extends BaseController {
     public Label labelCongratulations;
 
     public void onButtonOkClicked() {
@@ -12,7 +13,7 @@ public class OrderController {
         stage.close();
     }
 
-    public void setCongratulationsMessage(final String message) {
+    public void setContent(final String message) {
         this.labelCongratulations.setText(message);
     }
 }

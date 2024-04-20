@@ -1,20 +1,21 @@
 package com.github.schwarzfelix.coerschkes.fxfrontend.scene.shop;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public final class CampingTentRow {
     private final SimpleStringProperty name;
     private final SimpleStringProperty size;
-    private final SimpleStringProperty persons;
+    private final SimpleIntegerProperty persons;
     private final SimpleStringProperty price;
-    private final SimpleStringProperty stock;
+    private final SimpleIntegerProperty stock;
 
-    public CampingTentRow(String name, String size, String persons, String price, String stock) {
+    public CampingTentRow(String name, String size, int persons, String price, int stock) {
         this.name = new SimpleStringProperty(name);
         this.size = new SimpleStringProperty(size);
-        this.persons = new SimpleStringProperty(persons);
+        this.persons = new SimpleIntegerProperty(persons);
         this.price = new SimpleStringProperty(price);
-        this.stock = new SimpleStringProperty(stock);
+        this.stock = new SimpleIntegerProperty(stock);
     }
 
     public String getName() {
@@ -25,7 +26,7 @@ public final class CampingTentRow {
         return size.get();
     }
 
-    public String getPersons() {
+    public int getPersons() {
         return persons.get();
     }
 
@@ -33,7 +34,7 @@ public final class CampingTentRow {
         return price.get();
     }
 
-    public String getStock() {
+    public int getStock() {
         return stock.get();
     }
 }

@@ -8,7 +8,6 @@ module com.github.schwarzfelix.coerschkes.fxfrontend {
     opens com.github.schwarzfelix.coerschkes.fxfrontend to javafx.fxml;
     exports com.github.schwarzfelix.coerschkes.fxfrontend;
     exports com.github.schwarzfelix.coerschkes.fxfrontend.infrastructure;
-    exports com.github.schwarzfelix.coerschkes.fxfrontend.domain;
     opens com.github.schwarzfelix.coerschkes.fxfrontend.infrastructure to javafx.fxml;
     exports com.github.schwarzfelix.coerschkes.fxfrontend.scene.shop;
     exports com.github.schwarzfelix.coerschkes.fxfrontend.scene.details;

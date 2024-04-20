@@ -1,6 +1,5 @@
 package com.github.schwarzfelix.coerschkes.fxfrontend.infrastructure;
 
-import com.github.schwarzfelix.coerschkes.fxfrontend.domain.CampingTent;
 import javafx.application.Platform;
 
 import java.net.http.HttpClient;
