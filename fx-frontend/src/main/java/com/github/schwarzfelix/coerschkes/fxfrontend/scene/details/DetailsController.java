@@ -3,9 +3,9 @@ package com.github.schwarzfelix.coerschkes.fxfrontend.scene.details;
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.BaseController;
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.order.OrderController;
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.shop.ForcedReloadException;
-import com.github.schwarzfelix.coerschkes.fxfrontend.scene.shop.ShopController;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -33,6 +33,8 @@ public class DetailsController extends BaseController {
     public Label labelPrice;
     @FXML
     public ScrollPane scrollPaneDescription;
+    @FXML
+    public Button orderButton;
 
     public void initialize() {
         scrollPaneDescription.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -66,6 +68,10 @@ public class DetailsController extends BaseController {
         this.labelName.setText(campingTentDetails.name());
         this.textDescription.setText(campingTentDetails.description());
         this.labelPrice.setText(campingTentDetails.price());
+    }
+
+    public void disableOrder() {
+        this.orderButton.setDisable(true);
     }
 
     private void initializeOrderStage() {

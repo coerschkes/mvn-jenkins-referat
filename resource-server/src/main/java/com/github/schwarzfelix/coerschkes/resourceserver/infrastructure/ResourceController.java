@@ -30,13 +30,18 @@ public class ResourceController {
 
     @PutMapping("/tents/{id}")
     public ResponseEntity<String> updateTent(@PathVariable long id) {
-        this.repository.update(id);
+        this.repository.orderSingle(id);
         return ResponseEntity.created(URI.create("/tents/" + id)).build();
     }
 
 
     @ExceptionHandler({EntityNotFoundException.class})
-    public ResponseEntity<String> handleEntityNotFoundException() {
+    public ResponseEntity<Void> handleEntityNotFoundException() {
         return ResponseEntity.notFound().build();
+    }
+
+    @ExceptionHandler({IllegalStateException.class})
+    public ResponseEntity<Void> handleIllegalStateException() {
+        return ResponseEntity.badRequest().build();
     }
 }

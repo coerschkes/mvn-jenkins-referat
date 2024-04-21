@@ -59,6 +59,9 @@ public class ShopController extends BaseController {
 
     private void showDetailsStage(CampingTentRow selectedItem) {
         final CampingTent lookup = this.cache.lookup(selectedItem.getName());
+        if (lookup.stock() == 0) {
+            this.getController(DetailsController.class).disableOrder();
+        }
         this.getController(DetailsController.class).setContent(CampingTentDetails.of(lookup));
         this.detailsStage.show();
     }

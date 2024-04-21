@@ -31,7 +31,7 @@
                 <Font name="System Bold" size="18.0"/>
             </font>
         </Label>
-        <Button onAction="#onButtonOrderClicked" text="Order" prefHeight="20" prefWidth="80" layoutX="835"
+        <Button fx:id="orderButton" onAction="#onButtonOrderClicked" text="Order" prefHeight="20" prefWidth="80" layoutX="835"
                 layoutY="375"/>
         <Button onAction="#onButtonCancelClicked" text="Back" prefHeight="20" prefWidth="80" layoutX="835"
                 layoutY="10"/>

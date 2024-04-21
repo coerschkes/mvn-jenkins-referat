@@ -12,5 +12,5 @@ public interface CampingTentRepository {
 
     void deleteById(long id);
 
-    void update(long id);
+    void orderSingle(long id);
 }
