@@ -26,19 +26,7 @@ public class ShopController extends BaseController {
 
     public void initialize() {
         registerOnDoubleClickEvent();
-        this.repository.getAllTents(refreshStockTable());
-    }
-
-    private Consumer<List<CampingTent>> refreshStockTable() {
-        return tents -> {
-            this.cache.clear();
-            tableStock.setItems(FXCollections.observableList(tents
-                    .stream()
-                    .peek(this.cache::add)
-                    .map(CampingTentRow::of)
-                    .toList()));
-            tableStock.refresh();
-        };
+        update();
     }
 
     @FXML
@@ -54,7 +42,28 @@ public class ShopController extends BaseController {
 
     @FXML
     public void onButtonRefreshClicked() {
+        update();
+    }
+
+    public void update() {
         this.repository.getAllTents(refreshStockTable());
+    }
+
+    @Override
+    protected void closeStage() {
+        throw new UnsupportedOperationException("Not supported cause this is the primary stage.");
+    }
+
+    private Consumer<List<CampingTent>> refreshStockTable() {
+        return tents -> {
+            this.cache.clear();
+            this.tableStock.setItems(FXCollections.observableList(tents
+                    .stream()
+                    .peek(this.cache::add)
+                    .map(CampingTentRow::of)
+                    .toList()));
+            this.tableStock.refresh();
+        };
     }
 
     private void showDetailsStage(CampingTentRow selectedItem) {

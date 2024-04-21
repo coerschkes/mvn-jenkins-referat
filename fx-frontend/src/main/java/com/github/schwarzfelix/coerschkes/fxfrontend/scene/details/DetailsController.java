@@ -47,19 +47,14 @@ public class DetailsController extends BaseController {
         if (this.orderStage == null) {
             initializeOrderStage();
         }
-//        this.orderStage.setOnCloseRequest(e -> {
-//            getController(ShopController.class).initialize();
-//        });
-        getController(OrderController.class).setContent("Congratulations!\n\nYour order of '" + this.labelName.getText() + "' is complete.");
-        ((Stage) this.tentImage.getScene().getWindow()).close();
         this.repository.orderTent(this.tentId);
-        this.orderStage.show();
+        this.closeStage();
+        this.showOrderComplete();
     }
 
     @FXML
     public void onButtonCancelClicked() {
-        final Stage stage = (Stage) tentImage.getScene().getWindow();
-        stage.close();
+        this.closeStage();
     }
 
     public void setContent(final CampingTentDetails campingTentDetails) {
@@ -72,6 +67,16 @@ public class DetailsController extends BaseController {
 
     public void disableOrder() {
         this.orderButton.setDisable(true);
+    }
+
+    @Override
+    protected void closeStage() {
+        ((Stage) this.tentImage.getScene().getWindow()).close();
+    }
+
+    private void showOrderComplete() {
+        getController(OrderController.class).setContent("Congratulations!\n\nYour order of '" + this.labelName.getText() + "' is complete.");
+        this.orderStage.show();
     }
 
     private void initializeOrderStage() {

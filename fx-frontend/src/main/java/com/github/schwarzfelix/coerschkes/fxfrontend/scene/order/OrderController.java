@@ -11,12 +11,16 @@ public class OrderController extends BaseController {
     public Text textCongratulations;
 
     public void onButtonOkClicked() {
-        getController(ShopController.class).initialize();
-        final Stage stage = (Stage) textCongratulations.getScene().getWindow();
-        stage.close();
+        this.getController(ShopController.class).update();
+        this.closeStage();
     }
 
     public void setContent(final String message) {
         this.textCongratulations.setText(message);
+    }
+
+    @Override
+    protected void closeStage() {
+        ((Stage) textCongratulations.getScene().getWindow()).close();
     }
 }

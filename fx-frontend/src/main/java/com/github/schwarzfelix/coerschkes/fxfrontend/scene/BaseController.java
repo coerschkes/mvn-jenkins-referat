@@ -27,4 +27,7 @@ public abstract class BaseController {
         });
         wait.play();
     }
+
+    protected abstract void closeStage();
 }
+

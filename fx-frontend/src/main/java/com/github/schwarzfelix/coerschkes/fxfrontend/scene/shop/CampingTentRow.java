@@ -4,6 +4,8 @@ import com.github.schwarzfelix.coerschkes.fxfrontend.infrastructure.CampingTent;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+//getters are needed for the tableview to map the columns
+@SuppressWarnings("unused")
 public final class CampingTentRow {
     private final SimpleStringProperty name;
     private final SimpleStringProperty size;
@@ -11,7 +13,7 @@ public final class CampingTentRow {
     private final SimpleStringProperty price;
     private final SimpleIntegerProperty stock;
 
-    public CampingTentRow(String name, String size, int persons, String price, int stock) {
+    private CampingTentRow(String name, String size, int persons, String price, int stock) {
         this.name = new SimpleStringProperty(name);
         this.size = new SimpleStringProperty(size);
         this.persons = new SimpleIntegerProperty(persons);
