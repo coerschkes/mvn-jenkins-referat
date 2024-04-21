@@ -2,7 +2,6 @@ package com.github.schwarzfelix.coerschkes.fxfrontend.scene.details;
 
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.BaseController;
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.order.OrderController;
-import com.github.schwarzfelix.coerschkes.fxfrontend.scene.shop.ForcedReloadException;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,6 +17,9 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.logging.Logger;
 
+/**
+ * Controller for the details-scene. Creates the order-scene.
+ */
 public class DetailsController extends BaseController {
     private static final Logger LOGGER = Logger.getLogger(DetailsController.class.getName());
     private Stage orderStage;
@@ -57,6 +59,11 @@ public class DetailsController extends BaseController {
         this.closeStage();
     }
 
+    /**
+     * Set the content of the details-scene.
+     *
+     * @param campingTentDetails - content carrier
+     */
     public void setContent(final CampingTentDetails campingTentDetails) {
         this.tentId = campingTentDetails.id();
         this.tentImage.setImage(new Image(decodeImage(campingTentDetails)));
@@ -84,10 +91,7 @@ public class DetailsController extends BaseController {
             this.orderStage = new Stage();
             this.orderStage.setTitle("Order complete");
             this.orderStage.setScene(new Scene(getLoader(OrderController.class).load(), 400, 220));
-            this.orderStage.setOnShown(s -> {
-                throw new ForcedReloadException();
-            });
-            resizeStageToScene(orderStage, orderStage.getScene());
+            this.resizeStageToScene(this.orderStage);
         } catch (IOException e) {
             LOGGER.warning("Could not initialize order stage");
         }

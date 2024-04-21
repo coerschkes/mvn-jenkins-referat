@@ -5,6 +5,9 @@ import com.github.schwarzfelix.coerschkes.fxfrontend.infrastructure.CampingTent;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Simple cache to store the latest tent stock from the resource server.
+ */
 public class InMemoryCache {
     private final List<CampingTent> values = new ArrayList<>();
 
@@ -14,13 +17,6 @@ public class InMemoryCache {
 
     public void clear() {
         this.values.clear();
-    }
-
-    //create immutable copy of values
-    public List<CampingTent> getValues() {
-        return values.
-                stream()
-                .toList();
     }
 
     public CampingTent lookup(final String name) {

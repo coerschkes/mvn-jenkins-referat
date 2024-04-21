@@ -6,6 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * Controller for the order-scene.
+ */
 public class OrderController extends BaseController {
     @FXML
     public Text textCongratulations;
@@ -15,6 +18,11 @@ public class OrderController extends BaseController {
         this.closeStage();
     }
 
+    /**
+     * Set the content of the details-scene.
+     *
+     * @param message - content
+     */
     public void setContent(final String message) {
         this.textCongratulations.setText(message);
     }

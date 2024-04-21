@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
 
+/**
+ * Controller for the shop-scene (primary). Creates the details-scene.
+ */
 public class ShopController extends BaseController {
     private static final Logger LOGGER = Logger.getLogger(ShopController.class.getName());
     private final InMemoryCache cache = new InMemoryCache();
@@ -54,6 +57,11 @@ public class ShopController extends BaseController {
         throw new UnsupportedOperationException("Not supported cause this is the primary stage.");
     }
 
+    /**
+     * {@link Consumer} used as callback function to load the stock data async from the resource server and display it.
+     *
+     * @return callback function
+     */
     private Consumer<List<CampingTent>> refreshStockTable() {
         return tents -> {
             this.cache.clear();
@@ -80,15 +88,15 @@ public class ShopController extends BaseController {
             this.detailsStage = new Stage();
             this.detailsStage.setTitle("Details");
             this.detailsStage.setScene(new Scene(getLoader(DetailsController.class).load(), 930, 460));
-            this.detailsStage.setOnShown(s -> {
-                throw new ForcedReloadException();
-            });
-            resizeStageToScene(detailsStage, detailsStage.getScene());
+            this.resizeStageToScene(detailsStage);
         } catch (IOException e) {
             LOGGER.warning("Could not initialize details stage");
         }
     }
 
+    /**
+     * Registers an event listener for the double click event on {@link javafx.scene.control.TableRow}.
+     */
     private void registerOnDoubleClickEvent() {
         tableStock.setOnMouseClicked(event -> {
                     if (event.getClickCount() == 2) {

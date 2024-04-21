@@ -5,7 +5,10 @@ import com.github.schwarzfelix.coerschkes.fxfrontend.scene.order.OrderController
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.shop.ShopController;
 import javafx.fxml.FXMLLoader;
 
-public class FXMLLoaderFactory {
+/**
+ * Maps a specific controller class to its corresponding {@link FXMLLoader} instance.
+ */
+public class FXMLLoaderMapper {
     private static final FXMLLoader SHOP_SCENE_LOADER = new FXMLLoader(ShopController.class.getResource("shop.fxml"));
     private static final FXMLLoader ODER_SCENE_LOADER = new FXMLLoader(OrderController.class.getResource("order.fxml"));
     private static final FXMLLoader DETAILS_SCENE_LOADER = new FXMLLoader(DetailsController.class.getResource("details.fxml"));
