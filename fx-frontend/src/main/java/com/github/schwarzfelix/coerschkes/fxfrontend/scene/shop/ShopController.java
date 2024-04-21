@@ -52,6 +52,11 @@ public class ShopController extends BaseController {
         }
     }
 
+    @FXML
+    public void onButtonRefreshClicked() {
+        this.repository.getAllTents(refreshStockTable());
+    }
+
     private void showDetailsStage(CampingTentRow selectedItem) {
         final CampingTent lookup = this.cache.lookup(selectedItem.getName());
         this.getController(DetailsController.class).setContent(CampingTentDetails.of(lookup));

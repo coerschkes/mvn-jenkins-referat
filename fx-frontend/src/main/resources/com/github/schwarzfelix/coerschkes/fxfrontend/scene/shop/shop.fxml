@@ -37,5 +37,6 @@
         </TableView>
         <Button onAction="#onButtonDetailsClicked" text="Details" prefHeight="40" prefWidth="100" layoutX="490"
                 layoutY="455"/>
+        <Button onAction="#onButtonRefreshClicked" layoutX="380" layoutY="455" text="Refresh" prefHeight="40" prefWidth="100"/>
     </Pane>
 </BorderPane>
