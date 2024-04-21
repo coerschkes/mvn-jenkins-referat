@@ -28,16 +28,16 @@ class RestApiConnector {
         callGet("/tents", callback, CampingTentFactory::listFromJson);
     }
 
-    void put(final long id, final CampingTent body, final Consumer<Boolean> callback) {
-        callPut("/tents/" + id, body, callback);
+    void put(final long id) {
+        callPut("/tents/" + id);
     }
 
     private <T> void callGet(final String path, final Consumer<T> callback, final Function<String, T> function) {
         callApi(requestBuilder.buildGetRequest(path), callback, function);
     }
 
-    private <T> void callPut(final String path, final CampingTent body, final Consumer<Boolean> callback) {
-        callApi(requestBuilder.buildPutRequest(path, body), callback, Boolean::valueOf);
+    private <T> void callPut(final String path) {
+        callApi(requestBuilder.buildPutRequest(path), o -> {}, s -> s);
     }
 
     private <T> void callApi(final HttpRequest request, final Consumer<T> callback, final Function<String, T> transformer) {

@@ -28,9 +28,9 @@ public class ResourceController {
         return this.repository.findById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
 
-    @DeleteMapping("/tents/{id}")
+    @PutMapping("/tents/{id}")
     public ResponseEntity<String> updateTent(@PathVariable long id) {
-        this.repository.update(repository.findById(id).orElseThrow());
+        this.repository.update(id);
         return ResponseEntity.created(URI.create("/tents/" + id)).build();
     }
 

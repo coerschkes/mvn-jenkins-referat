@@ -3,6 +3,7 @@ package com.github.schwarzfelix.coerschkes.fxfrontend.scene.details;
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.BaseController;
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.order.OrderController;
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.shop.ForcedReloadException;
+import com.github.schwarzfelix.coerschkes.fxfrontend.scene.shop.ShopController;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -20,6 +21,7 @@ import java.util.logging.Logger;
 public class DetailsController extends BaseController {
     private static final Logger LOGGER = Logger.getLogger(DetailsController.class.getName());
     private Stage orderStage;
+    private long tentId;
 
     @FXML
     public ImageView tentImage;
@@ -43,10 +45,12 @@ public class DetailsController extends BaseController {
         if (this.orderStage == null) {
             initializeOrderStage();
         }
-        //todo callback here for shop scene to refresh
-        this.orderStage.setOnCloseRequest(e -> System.out.println("test"));
+//        this.orderStage.setOnCloseRequest(e -> {
+//            getController(ShopController.class).initialize();
+//        });
         getController(OrderController.class).setContent("Congratulations!\n\nYour order of '" + this.labelName.getText() + "' is complete.");
         ((Stage) this.tentImage.getScene().getWindow()).close();
+        this.repository.orderTent(this.tentId);
         this.orderStage.show();
     }
 
@@ -57,6 +61,7 @@ public class DetailsController extends BaseController {
     }
 
     public void setContent(final CampingTentDetails campingTentDetails) {
+        this.tentId = campingTentDetails.id();
         this.tentImage.setImage(new Image(decodeImage(campingTentDetails)));
         this.labelName.setText(campingTentDetails.name());
         this.textDescription.setText(campingTentDetails.description());

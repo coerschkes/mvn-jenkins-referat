@@ -27,21 +27,23 @@ public class InMemoryRepository implements CampingTentRepository {
     }
 
     @Override
-    public Optional<CampingTent> findById(long id) {
+    public Optional<CampingTent> findById(final long id) {
         return this.campingTents.stream().filter(tent -> tent.id() == id).findFirst();
     }
 
     @Override
-    public void deleteById(long id) {
+    public void deleteById(final long id) {
         this.findById(id).ifPresentOrElse(this.campingTents::remove, () -> {
             throw new EntityNotFoundException(id);
         });
     }
 
     @Override
-    public void update(CampingTent campingTent) {
-        deleteById(campingTent.id());
-        this.campingTents.add(campingTent);
+    public void update(final long id) {
+        var tent = this.findById(id).orElseThrow();
+        int index = this.campingTents.indexOf(tent);
+        this.deleteById(id);
+        this.campingTents.add(index, tent.withStock(tent.stock() - 1));
     }
 
     private String loadImageAsBase64(final String name) {

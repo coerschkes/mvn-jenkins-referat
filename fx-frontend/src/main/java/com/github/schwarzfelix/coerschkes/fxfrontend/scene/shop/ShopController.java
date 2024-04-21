@@ -31,13 +31,13 @@ public class ShopController extends BaseController {
 
     private Consumer<List<CampingTent>> refreshStockTable() {
         return tents -> {
-            this.tableStock.getItems().clear();
             this.cache.clear();
             tableStock.setItems(FXCollections.observableList(tents
                     .stream()
                     .peek(this.cache::add)
                     .map(CampingTentRow::of)
                     .toList()));
+            tableStock.refresh();
         };
     }
 

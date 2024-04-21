@@ -18,7 +18,7 @@ public class TentRestRepository {
         this.connector.getAll(callback);
     }
 
-    public void orderTent(final CampingTent campingTent, final Consumer<Boolean> callback) {
-        this.connector.put(campingTent.id(), campingTent, callback);
+    public void orderTent(final long id) {
+        this.connector.put(id);
     }
 }
