@@ -12,11 +12,11 @@ public class RequestBuilder {
         this.baseUri = baseUri;
     }
 
-    HttpRequest buildPutRequest(final String path) {
+    public HttpRequest buildPutRequest(final String path) {
         return buildSimpleRequest(path, builder -> builder.PUT(HttpRequest.BodyPublishers.ofString("")));
     }
 
-    HttpRequest buildGetRequest(final String path) {
+    public HttpRequest buildGetRequest(final String path) {
         return buildSimpleRequest(path, HttpRequest.Builder::GET);
     }
 
