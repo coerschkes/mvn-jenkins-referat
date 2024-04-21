@@ -11,7 +11,7 @@ public class TentRestRepository {
     }
 
     public void getAllTents(final Consumer<List<CampingTent>> callback) {
-        this.connector.callGet(callback, JsonListTransformer::listFromJson);
+        this.connector.callGet(callback, JsonListTransformer::fromJson);
     }
 
     public void orderTent(final long id) {

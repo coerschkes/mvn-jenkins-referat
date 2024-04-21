@@ -8,7 +8,7 @@ import java.util.List;
 public class JsonListTransformer {
     private static final Gson GSON = new Gson();
 
-    public static List<CampingTent> listFromJson(final String json) {
+    public static List<CampingTent> fromJson(final String json) {
         final TypeToken<List<CampingTent>> typeToken = new TypeToken<>() {
         };
         return GSON.fromJson(json, typeToken.getType());
