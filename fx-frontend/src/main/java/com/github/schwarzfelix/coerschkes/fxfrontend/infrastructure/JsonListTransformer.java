@@ -5,20 +5,12 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
 
-class CampingTentFactory {
+public class JsonListTransformer {
     private static final Gson GSON = new Gson();
 
-    static CampingTent fromJson(final String json) {
-        return GSON.fromJson(json, CampingTent.class);
-    }
-
-    static List<CampingTent> listFromJson(final String json) {
+    public static List<CampingTent> listFromJson(final String json) {
         final TypeToken<List<CampingTent>> typeToken = new TypeToken<>() {
         };
         return GSON.fromJson(json, typeToken.getType());
-    }
-
-    static String toJson(final CampingTent campingTent) {
-        return GSON.toJson(campingTent);
     }
 }
