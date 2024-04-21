@@ -2,11 +2,14 @@ package com.github.schwarzfelix.coerschkes.fxfrontend.scene.details;
 
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.BaseController;
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.order.OrderController;
+import com.github.schwarzfelix.coerschkes.fxfrontend.scene.shop.ForcedReloadException;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.ByteArrayInputStream;
@@ -20,9 +23,20 @@ public class DetailsController extends BaseController {
 
     @FXML
     public ImageView tentImage;
+    @FXML
     public Label labelName;
-    public Label labelDescription;
+    @FXML
+    public Text textDescription;
+    @FXML
     public Label labelPrice;
+    @FXML
+    public ScrollPane scrollPaneDescription;
+
+    public void initialize() {
+        scrollPaneDescription.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPaneDescription.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPaneDescription.setStyle("-fx-background-color:transparent;");
+    }
 
     @FXML
     public void onButtonOrderClicked() {
@@ -31,7 +45,8 @@ public class DetailsController extends BaseController {
         }
         //todo callback here for shop scene to refresh
         this.orderStage.setOnCloseRequest(e -> System.out.println("test"));
-        getController(OrderController.class).setContent("congratulations! Order of " + this.labelName.getText() + " complete.");
+        getController(OrderController.class).setContent("Congratulations!\n\nYour order of '" + this.labelName.getText() + "' is complete.");
+        ((Stage) this.tentImage.getScene().getWindow()).close();
         this.orderStage.show();
     }
 
@@ -44,7 +59,7 @@ public class DetailsController extends BaseController {
     public void setContent(final CampingTentDetails campingTentDetails) {
         this.tentImage.setImage(new Image(decodeImage(campingTentDetails)));
         this.labelName.setText(campingTentDetails.name());
-        this.labelDescription.setText(campingTentDetails.description());
+        this.textDescription.setText(campingTentDetails.description());
         this.labelPrice.setText(campingTentDetails.price());
     }
 
@@ -52,7 +67,11 @@ public class DetailsController extends BaseController {
         try {
             this.orderStage = new Stage();
             this.orderStage.setTitle("Order complete");
-            this.orderStage.setScene(new Scene(getLoader(OrderController.class).load(), 200, 200));
+            this.orderStage.setScene(new Scene(getLoader(OrderController.class).load(), 400, 220));
+            this.orderStage.setOnShown(s -> {
+                throw new ForcedReloadException();
+            });
+            resizeStageToScene(orderStage, orderStage.getScene());
         } catch (IOException e) {
             LOGGER.warning("Could not initialize order stage");
         }

@@ -5,13 +5,11 @@ import com.github.schwarzfelix.coerschkes.fxfrontend.scene.BaseController;
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.InMemoryCache;
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.details.CampingTentDetails;
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.details.DetailsController;
-import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,6 +25,7 @@ public class ShopController extends BaseController {
     private TableView<CampingTentRow> tableStock;
 
     public void initialize() {
+        registerOnDoubleClickEvent();
         this.repository.getAllTents(refreshStockTable());
     }
 
@@ -63,7 +62,7 @@ public class ShopController extends BaseController {
         try {
             this.detailsStage = new Stage();
             this.detailsStage.setTitle("Details");
-            this.detailsStage.setScene(new Scene(getLoader(DetailsController.class).load(), 600, 500));
+            this.detailsStage.setScene(new Scene(getLoader(DetailsController.class).load(), 930, 460));
             this.detailsStage.setOnShown(s -> {
                 throw new ForcedReloadException();
             });
@@ -73,12 +72,12 @@ public class ShopController extends BaseController {
         }
     }
 
-    private void resizeStageToScene(final Stage stage, final Scene scene) {
-        final PauseTransition wait = new PauseTransition(Duration.seconds(0.0001));
-        wait.setOnFinished((e) -> {
-            stage.setWidth(scene.getWidth());
-            stage.setHeight(scene.getHeight());
-        });
-        wait.play();
+    private void registerOnDoubleClickEvent() {
+        tableStock.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2) {
+                        onButtonDetailsClicked();
+                    }
+                }
+        );
     }
 }

@@ -18,7 +18,7 @@
                         <PropertyValueFactory property="size"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn text="Persons">
+                <TableColumn text="Persons" prefWidth="68">
                     <cellValueFactory>
                         <PropertyValueFactory property="persons"/>
                     </cellValueFactory>

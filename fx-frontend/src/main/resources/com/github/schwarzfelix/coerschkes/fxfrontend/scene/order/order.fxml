@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 <BorderPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.github.schwarzfelix.coerschkes.fxfrontend.scene.order.OrderController">
-    <!--    public record CampingTent(long id, String name, String description, String price, String size, boolean hasInnerTent,
-                              String manufacturer, String color, int personCount, String weight, String material, int stock,
-                              String pictureBase64) {
-    }-->
     <Pane BorderPane.alignment="CENTER">
-        <Label maxWidth="200" fx:id="labelCongratulations" wrapText="true">
+        <Text textAlignment="CENTER" wrappingWidth="400" layoutX="10" layoutY="30" fx:id="textCongratulations">
             <font>
-                <Font name="System Bold" size="24.0"/>
+                <Font name="System" size="24.0"/>
             </font>
-        </Label>
-        <Button onAction="#onButtonOkClicked" text="Ok" prefHeight="40" prefWidth="100" layoutX="490"
-                layoutY="400"/>
+        </Text>
+        <Button onAction="#onButtonOkClicked" text="Ok" prefHeight="20" prefWidth="80" layoutX="170" layoutY="145"/>
     </Pane>
 </BorderPane>
