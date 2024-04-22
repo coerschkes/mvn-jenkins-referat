@@ -53,6 +53,13 @@
                                         <include name="resource-server-0.0.1-SNAPSHOT-spring-boot.jar"/>
                                     </fileset>
                                 </scp>
+                                <sshexec trust="true" failonerror="true"
+                                         host="localhost"
+                                         port="2222"
+                                         username="root"
+                                         password="root"
+                                         command="/server/restart.sh /server/resource-server-0.0.1-SNAPSHOT-spring-boot.jar"
+                                />
                             </tasks>
                         </configuration>
                         <executions>
