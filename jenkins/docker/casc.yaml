@@ -1,0 +1,13 @@
+unclassified:
+  location:
+    url: http://localhost:8081/
+jobs:
+  - script: >
+      multibranchPipelineJob('mvn-jenkins-referat') {
+          branchSources {
+              git {
+                  id = 'mvn-jenkins-referat'
+                  remote('https://github.com/coerschkes/mvn-jenkins-referat.git')
+              }
+          }
+      }
