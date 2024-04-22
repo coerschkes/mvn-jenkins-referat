@@ -1,1 +1,9 @@
 # TODO: Start server with jdk enabled -> ready to deploy resource server
+services:
+  resource-server:
+    container_name: resource-server
+    image: resource-server
+    restart: on-failure
+    ports:
+      - 2222:22
+      - 8080:8080
