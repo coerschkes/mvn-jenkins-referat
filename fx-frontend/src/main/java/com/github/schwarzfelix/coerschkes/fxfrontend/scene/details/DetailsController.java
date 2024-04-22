@@ -91,7 +91,8 @@ public class DetailsController extends BaseController {
             this.orderStage = new Stage();
             this.orderStage.setTitle("Order complete");
             this.orderStage.setScene(new Scene(getLoader(OrderController.class).load(), 400, 220));
-            this.resizeStageToScene(this.orderStage);
+            this.orderStage.setMinWidth(400);
+            this.orderStage.setMinHeight(220);
         } catch (IOException e) {
             LOGGER.warning("Could not initialize order stage");
         }

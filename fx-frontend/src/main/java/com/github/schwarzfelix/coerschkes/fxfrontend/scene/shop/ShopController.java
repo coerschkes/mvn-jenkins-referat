@@ -88,7 +88,8 @@ public class ShopController extends BaseController {
             this.detailsStage = new Stage();
             this.detailsStage.setTitle("Details");
             this.detailsStage.setScene(new Scene(getLoader(DetailsController.class).load(), 930, 460));
-            this.resizeStageToScene(detailsStage);
+            this.detailsStage.setMinWidth(930);
+            this.detailsStage.setMinHeight(460);
         } catch (IOException e) {
             LOGGER.warning("Could not initialize details stage");
         }
