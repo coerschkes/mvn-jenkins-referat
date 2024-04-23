@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'mvn deploy -pl resource-server'
+                sh 'mvn deploy -pl resource-server -P deploy-remote'
             }
         }
     }

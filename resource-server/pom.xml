@@ -37,7 +37,7 @@
 
     <profiles>
         <profile>
-            <id>deploy</id>
+            <id>deploy-remote</id>
             <build>
                 <plugins>
                     <plugin>
