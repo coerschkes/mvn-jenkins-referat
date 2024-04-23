@@ -47,7 +47,7 @@
                             <tasks>
                                 <scp todir="root@resource-server:/server"
                                      username="root"
-                                     port="2222" trust="true" password="root"
+                                     port="22" trust="true" password="root"
                                      failonerror="true" verbose="true">
                                     <fileset dir="target">
                                         <include name="resource-server-0.0.1-SNAPSHOT-spring-boot.jar"/>
@@ -55,7 +55,7 @@
                                 </scp>
                                 <sshexec trust="true" failonerror="true"
                                          host="resource-server"
-                                         port="2222"
+                                         port="22"
                                          username="root"
                                          password="root"
                                          command="/server/restart.sh /server/resource-server-0.0.1-SNAPSHOT-spring-boot.jar"
