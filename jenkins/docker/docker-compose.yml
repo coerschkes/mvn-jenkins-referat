@@ -1,9 +1,0 @@
-#TODO: Setup jenkins + pipeline
-services:
-  resource-server:
-    container_name: jenkins
-    image: jenkins/jenkins:lts
-    restart: on-failure
-    ports:
-      - 8081:8080
-      - 50000:50000
