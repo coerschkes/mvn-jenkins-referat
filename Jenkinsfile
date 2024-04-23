@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'mvn deploy'
+                sh 'mvn deploy -pl resource-server'
             }
         }
     }
