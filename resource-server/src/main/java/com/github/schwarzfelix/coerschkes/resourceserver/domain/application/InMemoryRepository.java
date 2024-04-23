@@ -10,7 +10,6 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
-//TODO: Test cases
 @Repository
 public class InMemoryRepository implements CampingTentRepository {
     private final ResourceLoader resourceLoader;
