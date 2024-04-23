@@ -3,7 +3,6 @@ package com.github.schwarzfelix.coerschkes.fxfrontend.scene.shop;
 import com.github.schwarzfelix.coerschkes.fxfrontend.infrastructure.CampingTent;
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.BaseController;
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.InMemoryCache;
-import com.github.schwarzfelix.coerschkes.fxfrontend.scene.details.CampingTentDetails;
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.details.DetailsController;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -79,7 +78,7 @@ public class ShopController extends BaseController {
         if (lookup.stock() == 0) {
             this.getController(DetailsController.class).disableOrder();
         }
-        this.getController(DetailsController.class).setContent(CampingTentDetails.of(lookup));
+        this.getController(DetailsController.class).setContent(lookup);
         this.detailsStage.show();
     }
 

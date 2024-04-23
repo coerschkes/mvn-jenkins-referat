@@ -1,5 +1,6 @@
 package com.github.schwarzfelix.coerschkes.fxfrontend.scene.details;
 
+import com.github.schwarzfelix.coerschkes.fxfrontend.infrastructure.CampingTent;
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.BaseController;
 import com.github.schwarzfelix.coerschkes.fxfrontend.scene.order.OrderController;
 import javafx.fxml.FXML;
@@ -62,14 +63,14 @@ public class DetailsController extends BaseController {
     /**
      * Set the content of the details-scene.
      *
-     * @param campingTentDetails - content carrier
+     * @param campingTent - content carrier
      */
-    public void setContent(final CampingTentDetails campingTentDetails) {
-        this.tentId = campingTentDetails.id();
-        this.tentImage.setImage(new Image(decodeImage(campingTentDetails)));
-        this.labelName.setText(campingTentDetails.name());
-        this.textDescription.setText(campingTentDetails.description());
-        this.labelPrice.setText(campingTentDetails.price());
+    public void setContent(final CampingTent campingTent) {
+        this.tentId = campingTent.id();
+        this.tentImage.setImage(new Image(decodeImage(campingTent.pictureBase64())));
+        this.labelName.setText(campingTent.name());
+        this.textDescription.setText(campingTent.description());
+        this.labelPrice.setText(campingTent.price());
     }
 
     public void disableOrder() {
@@ -98,8 +99,8 @@ public class DetailsController extends BaseController {
         }
     }
 
-    private static ByteArrayInputStream decodeImage(CampingTentDetails campingTentDetails) {
-        final byte[] decodedImage = Base64.getDecoder().decode(campingTentDetails.imageBase64());
+    private static ByteArrayInputStream decodeImage(final String base64String) {
+        final byte[] decodedImage = Base64.getDecoder().decode(base64String);
         return new ByteArrayInputStream(decodedImage);
     }
 }
