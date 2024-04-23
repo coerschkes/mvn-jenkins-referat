@@ -8,7 +8,7 @@ credentials:
           - usernamePassword:
               scope: GLOBAL
               id: "gh_token"
-              username: "schwarzfelix"
+              username: "coerschkes"
               password: "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"
 jobs:
   - script: >
