@@ -37,7 +37,58 @@
 
     <profiles>
         <profile>
-            <id>deploy</id>
+            <id>deploy-remote</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.8</version>
+                        <configuration>
+                            <tasks>
+                                <scp todir="root@resource-server:/server"
+                                     username="root"
+                                     port="22" trust="true" password="root"
+                                     failonerror="true" verbose="true">
+                                    <fileset dir="target">
+                                        <include name="resource-server-0.0.1-SNAPSHOT-spring-boot.jar"/>
+                                    </fileset>
+                                </scp>
+                                <sshexec trust="true" failonerror="true"
+                                         host="resource-server"
+                                         port="22"
+                                         username="root"
+                                         password="root"
+                                         command="/server/restart.sh /server/resource-server-0.0.1-SNAPSHOT-spring-boot.jar"
+                                />
+                            </tasks>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>scp</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.jcraft</groupId>
+                                <artifactId>jsch</artifactId>
+                                <version>0.1.53</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.apache.ant</groupId>
+                                <artifactId>ant-jsch</artifactId>
+                                <version>1.9.6</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>deploy-localhost</id>
             <build>
                 <plugins>
                     <plugin>

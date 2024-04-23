@@ -1,0 +1,23 @@
+unclassified:
+  location:
+    url: http://localhost:8081/
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - usernamePassword:
+              scope: GLOBAL
+              id: "gh_token"
+              username: "coerschkes"
+              password: "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"
+jobs:
+  - script: >
+      multibranchPipelineJob('mvn-jenkins-referat') {
+          branchSources {
+              git {
+                  id = 'mvn-jenkins-referat'
+                  remote('https://github.com/coerschkes/mvn-jenkins-referat.git')
+                  credentialsId('gh_token')
+              }
+          }
+      }
