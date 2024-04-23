@@ -1,9 +1,4 @@
 #TODO: Setup jenkins + pipeline
-
-# https://www.digitalocean.com/community/tutorials/how-to-automate-jenkins-setup-with-docker-and-jenkins-configuration-as-code
-# https://opensource.com/article/20/4/jcasc-jenkins
-# https://github.com/jenkinsci/job-dsl-plugin/wiki/JCasC
-
 services:
   resource-server:
     container_name: jenkins
