@@ -21,3 +21,4 @@ services:
 networks:
   service-network:
     name: service-network
+    external: true
